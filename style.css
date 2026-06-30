@@ -1,37 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* 
-   COMMON / SHARED STYLES
-    */
+/* ==========================================================================
+   DESIGN TOKENS & VARIABLES
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --color-bg: #f0f2f5;
+    --color-card-bg: #ffffff;
+    --color-text: #2c2c2c;
+    --color-label: #2c2c2c;
+    --color-border: #d4cbf0;
+    --color-border-focus: #7b6cb5;
+    --color-focus-ring: rgba(123, 108, 181, 0.15);
 
+    /* Brand Purple */
+    --color-primary: #7b6cb5;
+    --color-primary-dark: #543d9c;
+
+    /* Fields Backgrounds */
+    --color-input-bg: #f1effb;
+    --color-readonly-bg: #e8e4f8;
+
+    /* Action Buttons */
+    --color-save: #28cd41;
+    --color-update: #4e5d6c;
+    --color-nav: #4e5d6c;
+
+    /* Radii */
+    --radius-card: 28px;
+    --radius-input: 12px;
+    --radius-btn: 10px;
+    --radius-panel: 12px;
+
+    /* Layout Dimensions */
+    --label-width: 140px;
+    --gap-row: 20px;
+    --gap-col: 50px;
+}
+
+/* ==========================================================================
+   RESET & LAYOUT GENERAL
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    background: #f0f2f5;
+body,
+.page-wrapper {
+    background: var(--color-bg);
     font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 30px 16px;
     box-sizing: border-box;
+    gap: 30px;
+    width: 100%;
 }
 
-.page-wrapper {
+body>form,
+.page-wrapper>form {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
-.form-card, .container, .card {
-    background: #ffffff;
+/* ==========================================================================
+   CARD CONTAINER
+   ========================================================================== */
+.form-card,
+.container,
+.card,
+#last_box {
+    background: var(--color-card-bg);
     width: 100%;
     max-width: 950px;
-    border-radius: 28px;
+    border-radius: var(--radius-card);
     border: 1px solid #c8c8c8;
     padding: 45px 50px 35px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
@@ -39,16 +89,26 @@ body {
     position: relative;
 }
 
-.header-division, .header-block, .main-title-container {
+/* ==========================================================================
+   HEADINGS
+   ========================================================================== */
+.header-division,
+.header-block,
+.main-title-container {
     text-align: center;
     margin-bottom: 25px;
+    width: 100%;
 }
 
-#heading, .main-title, .title {
-    display: inline-block;
-    background-color: #7b6cb5;
+#heading,
+.main-title,
+.title,
+.main-title h1,
+.title h1 {
+    display: block;
+    background-color: var(--color-primary);
     color: #ffffff;
-    font-size: 28px;
+    font-size: 28px !important;
     font-weight: 600;
     border-radius: 12px;
     padding: 12px 35px;
@@ -57,18 +117,25 @@ body {
     margin: 0 auto 10px auto;
     box-shadow: none;
     font-family: 'Poppins', 'Segoe UI', sans-serif;
+    white-space: normal;
 }
 
-.subheader-division, .sub-title-container {
+.subheader-division,
+.sub-title-container {
     text-align: center;
     margin-bottom: 30px;
+    width: 100%;
 }
 
-#subheading, .sub-title, .module-title {
-    display: inline-block;
-    background-color: #543d9c;
+#subheading,
+.sub-title,
+.module-title,
+.sub-title h2,
+.module-title h2 {
+    display: block;
+    background-color: var(--color-primary-dark);
     color: #ffffff;
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: 500;
     border-radius: 10px;
     padding: 8px 24px;
@@ -76,45 +143,83 @@ body {
     width: fit-content;
     margin: 10px auto 20px auto;
     box-shadow: none;
+    white-space: normal;
 }
 
+.main-title h1,
+.title h1,
+.sub-title h2,
+.module-title h2 {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    border-radius: 0 !important;
+}
+
+/* ==========================================================================
+   GRID LAYOUT SYSTEM
+   ========================================================================== */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 40px;
-    row-gap: 20px;
+    column-gap: var(--gap-col);
+    row-gap: var(--gap-row);
     margin-bottom: 25px;
+    align-items: start;
+    width: 100%;
 }
 
-.form-group, .form-field, .form-row {
+.form-group,
+.form-field,
+.form-row {
     display: flex;
     align-items: center;
     gap: 15px;
     width: 100%;
 }
 
-.form-group.full-width, .form-field.full-width, .form-row.full-width {
-    grid-column: span 2;
+.full-width,
+.full-row,
+.form-group.full-width,
+.form-row.full-row,
+.form-field.full-width {
+    grid-column: span 2 !important;
 }
 
-.form-group label, .form-field label, .form-row label {
-    width: 150px;
-    min-width: 150px;
-    font-size: 15px;
+/* ==========================================================================
+   FORM LABELS
+   ========================================================================== */
+.form-group label,
+.form-field label,
+.form-row label {
+    width: var(--label-width);
+    min-width: var(--label-width);
+    font-size: 14px;
     font-weight: 600;
-    color: #2c2c2c;
-    text-align: left;
+    color: var(--color-label);
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
+    text-align: right;
+    white-space: nowrap;
 }
 
-.required, .req, span.required, label span {
+.required,
+.req,
+span.required,
+label span {
     color: #ef4444;
-    margin-left: 3px;
+    margin-left: 2px;
     font-weight: bold;
 }
 
+/* ==========================================================================
+   INPUTS, SELECTS & TEXTAREAS
+   ========================================================================== */
 .input-control,
 input[type="text"],
 input[type="email"],
@@ -123,17 +228,17 @@ input[type="number"],
 textarea,
 select {
     flex: 1;
-    background-color: #ffffff;
-    border: 1.5px solid #d4cbf0;
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 15px;
-    color: #2c2c2c;
-    outline: none;
-    transition: all 0.2s ease-in-out;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: inherit;
+    background-color: var(--color-input-bg) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-input) !important;
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+    color: var(--color-text) !important;
+    outline: none !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-family: inherit !important;
 }
 
 .input-control:focus,
@@ -143,22 +248,22 @@ input[type="password"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 select:focus {
-    background-color: #ffffff;
-    border-color: #7b6cb5;
-    box-shadow: 0 0 0 3px rgba(123, 108, 181, 0.15);
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 0 0 3px var(--color-focus-ring) !important;
 }
 
 .input-control[readonly],
-input[readonly] {
-    background-color: #f5f5f5;
-    cursor: default;
+input[readonly],
+input:disabled {
+    background-color: var(--color-readonly-bg) !important;
+    cursor: default !important;
 }
 
 textarea {
     resize: none;
 }
 
-select, select.input-control {
+select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23543d9c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -168,44 +273,73 @@ select, select.input-control {
     cursor: pointer;
 }
 
-.input-row-wrapper, .input-wrapper, .input-with-btn {
+/* ==========================================================================
+   INLINE INPUTS (INPUTS WITH BUTTONS)
+   ========================================================================== */
+.input-row-wrapper,
+.input-wrapper,
+.input-with-btn {
     display: flex;
-    gap: 10px;
+    align-items: stretch;
     flex: 1;
     position: relative;
-    align-items: stretch;
     width: 100%;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-input) !important;
+    overflow: hidden;
+    background-color: var(--color-input-bg) !important;
 }
 
-.input-row-wrapper input, .input-wrapper input, .input-with-btn input {
+.input-row-wrapper input,
+.input-wrapper input,
+.input-with-btn input {
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
     flex: 1;
     min-width: 0;
 }
 
-.btn-inline, .action-btn.find-btn, .btn-new {
-    background-color: #ffffff;
-    border: 1.5px solid #7b6cb5;
-    color: #543d9c;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 0 24px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    height: 48px;
-    box-sizing: border-box;
+.input-row-wrapper button,
+.input-wrapper button,
+.input-with-btn button,
+.btn-inline,
+.action-btn.find-btn,
+.btn-new {
+    background-color: #ffffff !important;
+    color: var(--color-primary-dark) !important;
+    border: none !important;
+    border-left: 1.5px solid var(--color-border) !important;
+    padding: 0 20px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    height: auto !important;
+    border-radius: 0 !important;
 }
 
-.btn-inline:hover, .action-btn.find-btn:hover, .btn-new:hover {
-    background-color: #f5f2fd;
-    border-color: #543d9c;
+.input-row-wrapper button:hover,
+.input-wrapper button:hover,
+.input-with-btn button:hover,
+.btn-inline:hover,
+.action-btn.find-btn:hover,
+.btn-new:hover {
+    background-color: #f5f2fd !important;
+    color: var(--color-primary-dark) !important;
 }
 
-.button-row, .button-container, .button-group, .btn-row {
+/* ==========================================================================
+   BOTTOM ACTION BUTTON GROUP
+   ========================================================================== */
+.button-row,
+.button-container,
+.button-group,
+.btn-row {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,14 +349,16 @@ select, select.input-control {
     width: 100%;
 }
 
-.btn-action, .btn, .button-group button, .mode-buttons button {
+.btn-action,
+.btn,
+.button-group button {
     font-family: inherit;
     font-weight: 600;
     font-size: 15px;
     color: #ffffff;
     padding: 12px 30px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-btn);
     cursor: pointer;
     transition: all 0.2s ease;
     min-width: 120px;
@@ -235,66 +371,121 @@ select, select.input-control {
     justify-content: center;
 }
 
-.btn-action:hover, .btn:hover, .button-group button:hover {
+.btn-action:hover,
+.btn:hover,
+.button-group button:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
 }
 
-.btn-action:active, .btn:active, .button-group button:active {
+.btn-action:active,
+.btn:active,
+.button-group button:active {
     transform: translateY(0);
 }
 
-/* Common Button Colors */
-.btn-blue, .btn-new-main, .new-btn, #newBtn, #new_button, #btnNew, .mode_button {
+/* Common Button Colors (Strict Overrides to Prevent Cache issues) */
+.btn-blue,
+.btn-new-main,
+.new-btn,
+#newBtn,
+#new_button,
+.mode_button {
     background-color: #5856d6 !important;
     color: #ffffff !important;
 }
-.btn-blue:hover, .btn-new-main:hover, .new-btn:hover, #newBtn:hover, #new_button:hover, #btnNew:hover, .mode_button:hover {
+
+.btn-blue:hover,
+.btn-new-main:hover,
+.new-btn:hover,
+#newBtn:hover,
+#new_button:hover,
+.mode_button:hover {
     background-color: #4846c1 !important;
 }
 
-.btn-green, .save-btn, .save_btn, #saveBtn, #save_button, #btnSave, .btn-save {
+.btn-green,
+.save-btn,
+.save_btn,
+#saveBtn,
+#save_button,
+#btnSave,
+.btn-save {
     background-color: #28cd41 !important;
     color: #ffffff !important;
 }
-.btn-green:hover, .save-btn:hover, .save_btn:hover, #saveBtn:hover, #save_button:hover, #btnSave:hover, .btn-save:hover {
+
+.btn-green:hover,
+.save-btn:hover,
+.save_btn:hover,
+#saveBtn:hover,
+#save_button:hover,
+#btnSave:hover,
+.btn-save:hover {
     background-color: #20a634 !important;
 }
 
-.btn-grey, .prev-btn, .previous_btn, #btnPrev, .btn-nav, .update-btn, #updateBtn, #btnUpdate, .btn-update {
+.btn-grey,
+.prev-btn,
+.previous_btn,
+#btnPrev,
+.btn-nav,
+.update-btn,
+#updateBtn,
+#btnUpdate,
+.btn-update {
     background-color: #4e5d6c !important;
     color: #ffffff !important;
-    border: none !important;
 }
-.btn-grey:hover, .prev-btn:hover, .previous_btn:hover, #btnPrev:hover, .btn-nav:hover, .update-btn:hover, #updateBtn:hover, #btnUpdate:hover, .btn-update:hover {
+
+.btn-grey:hover,
+.prev-btn:hover,
+.previous_btn:hover,
+#btnPrev:hover,
+.btn-nav:hover,
+.update-btn:hover,
+#updateBtn:hover,
+#btnUpdate:hover,
+.btn-update:hover {
     background-color: #3d4955 !important;
 }
 
-.btn-orange, .next-btn, .next_btn, #btnNext {
+.btn-orange,
+.next-btn,
+.next_btn,
+#btnNext {
     background-color: #f39c12 !important;
     color: #ffffff !important;
 }
-.btn-orange:hover, .next-btn:hover, .next_btn:hover, #btnNext:hover {
+
+.btn-orange:hover,
+.next-btn:hover,
+.next_btn:hover,
+#btnNext:hover {
     background-color: #cf830c !important;
 }
 
-.btn-red, .exit-btn, .exit_btn, #exitBtn, #btnExit {
+.btn-red,
+.exit-btn,
+.exit_btn,
+#exitBtn,
+#btnExit {
     background-color: #d93838 !important;
     color: #ffffff !important;
-    border: none !important;
 }
-.btn-red:hover, .exit-btn:hover, .exit_btn:hover, #exitBtn:hover, #btnExit:hover {
+
+.btn-red:hover,
+.exit-btn:hover,
+.exit_btn:hover,
+#exitBtn:hover,
+#btnExit:hover {
     background-color: #b52b2b !important;
 }
 
-
-/* 
-   USER FORM STYLES
-   UOM FORM STYLES
-  ITEM FORM STYLES
- 
- */
-
+/* ==========================================================================
+   TOOLTIPS
+   ========================================================================== */
 .info-icon {
     display: inline-flex;
     justify-content: center;
@@ -313,13 +504,13 @@ select, select.input-control {
 }
 
 .info-icon:hover {
-    background: #7b6cb5;
+    background: var(--color-primary);
 }
 
 .info-icon .tooltip {
     visibility: hidden;
-    width: 220px;
-    background-color: #543d9c;
+    width: 340px;
+    background-color: var(--color-primary-dark);
     color: #fff;
     text-align: center;
     border-radius: 8px;
@@ -346,7 +537,7 @@ select, select.input-control {
     margin-left: -6px;
     border-width: 6px;
     border-style: solid;
-    border-color: #543d9c transparent transparent transparent;
+    border-color: var(--color-primary-dark) transparent transparent transparent;
 }
 
 .info-icon:hover .tooltip {
@@ -354,6 +545,9 @@ select, select.input-control {
     opacity: 1;
 }
 
+/* ==========================================================================
+   MODALS (FIND LIST WINDOWS)
+   ========================================================================== */
 .modal {
     display: none;
     position: fixed;
@@ -363,7 +557,7 @@ select, select.input-control {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
 }
@@ -377,7 +571,7 @@ select, select.input-control {
     max-width: 600px;
     border-radius: 15px;
     position: relative;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .close-modal {
@@ -409,14 +603,15 @@ select, select.input-control {
     border-collapse: collapse;
 }
 
-.find-table th, .find-table td {
+.find-table th,
+.find-table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 .find-table th {
-    background-color: #7b6cb5;
+    background-color: var(--color-primary);
     color: white;
 }
 
@@ -429,11 +624,14 @@ select, select.input-control {
     background-color: #E2E8F0;
 }
 
+/* ==========================================================================
+   TOAST NOTIFICATIONS
+   ========================================================================== */
 .toast {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #543d9c;
+    background-color: var(--color-primary-dark);
     color: #fff;
     text-align: center;
     border-radius: 8px;
@@ -458,23 +656,30 @@ select, select.input-control {
     box-shadow: 0 4px 12px rgba(217, 56, 56, 0.3);
 }
 
+/* ==========================================================================
+   VALIDATION ERROR MESSAGES
+   ========================================================================== */
+.err-msg {
+    color: #ef4444;
+    font-size: 0.76rem;
+    margin-top: 4px;
+    display: block;
+}
 
-/* 
-   SUPPLIER FORM STYLES
-    */
-
+/* ==========================================================================
+   SEARCH DROPDOWN PANELS (NITIN SEARCH LAYOUTS)
+   ========================================================================== */
 .dropdown-panel {
     position: absolute;
     top: calc(100% + 4px);
     left: 0;
     width: 620px;
     background: #fff;
-    border: 1.5px solid #d4cbf0;
-    border-radius: 12px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-panel);
     box-shadow: 0 8px 32px rgba(80, 60, 160, 0.13);
     z-index: 999;
     overflow: hidden;
-    box-sizing: border-box;
 }
 
 .dropdown-search-wrap {
@@ -484,39 +689,39 @@ select, select.input-control {
 
 .dropdown-search {
     width: 100%;
-    border: 1.5px solid #d1d5db;
-    border-radius: 8px;
     padding: 8px 12px;
-    font-size: 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 8px;
     outline: none;
-    background-color: #ffffff;
-    box-sizing: border-box;
-}
-
-.dropdown-search:focus {
-    border-color: #7b6cb5;
+    font-size: 0.85rem;
 }
 
 .dropdown-table-wrap {
-    max-height: 220px;
+    max-height: 240px;
     overflow-y: auto;
 }
 
 .dropdown-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 0.82rem;
+    text-align: left;
 }
 
-.dropdown-table thead th {
+.dropdown-table th,
+.dropdown-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    white-space: nowrap;
+}
+
+.dropdown-table th {
     background: #f3effc;
-    color: #543d9c;
-    font-weight: 700;
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1.5px solid #d4cbf0;
+    color: var(--color-primary-dark);
+    font-weight: 600;
     position: sticky;
     top: 0;
+    z-index: 10;
 }
 
 .dropdown-table tbody tr {
@@ -525,76 +730,57 @@ select, select.input-control {
 }
 
 .dropdown-table tbody tr:hover {
-    background: #f3effc;
+    background: #f3f0ff;
 }
 
-.dropdown-table tbody tr.selected-row {
+.dropdown-table tbody tr.selected {
     background: #ede9fe;
 }
 
-.dropdown-table tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #333;
-    max-width: 110px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-/* 
-   RESPONSIVE STYLES (MEDIA QUERIES)
-    */
-
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;
         row-gap: 15px;
     }
-    
-    .form-group.full-width, .form-field.full-width, .form-row.full-width {
-        grid-column: span 1;
-    }
-    
-    .form-group, .form-field, .form-row {
+
+    .form-group,
+    .form-field,
+    .form-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
     }
-    
-    .form-group label, .form-field label, .form-row label {
+
+    .form-group label,
+    .form-field label,
+    .form-row label {
         width: 100%;
-        min-width: unset;
+        min-width: 100%;
+        text-align: left;
+        justify-content: flex-start;
     }
-    
-    .input-row-wrapper, .input-wrapper, .input-with-btn {
-        width: 100%;
-    }
-    
-    .dropdown-panel {
-        width: 100%;
-        left: 0;
-    }
-    
-    #heading, .main-title, .title {
+
+    #heading,
+    .main-title,
+    .title {
         font-size: 22px;
         padding: 10px 20px;
-        width: auto;
     }
-    
-    #subheading, .sub-title, .module-title {
+
+    #subheading,
+    .sub-title,
+    .module-title {
         font-size: 16px;
         padding: 8px 18px;
-        width: auto;
     }
-    
-    .form-card, .container, .card {
-        padding: 25px 20px;
-        border-radius: 20px;
-    }
-    
-    .btn-action, .btn, .button-group button, .mode-buttons button {
-        width: 100%;
+
+    .form-card,
+    .container,
+    .card,
+    #last_box {
+        padding: 30px 20px;
     }
 }
